@@ -42,4 +42,8 @@ resource "aws_instance" "web" {
   root_block_device {
     volume_size = 8
   }
+
+  provisioner "local-exec" {
+    command = "chmod +x install_Ansible.sh"
+  }
 }
