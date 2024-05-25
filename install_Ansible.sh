@@ -1,19 +1,19 @@
 #!/bin/bash
-exec > >(tee -i /var/log/user-data.log)
-exec 2>&1
+apt-get update -y
+apt-get upgrade -y
 
-# Update apt package lists
-sudo apt update -y
+# Install Ansible and git
+apt-get install -y software-properties-common
+apt-add-repository --yes --update ppa:ansible/ansible
+apt-get update -y
+apt-get install -y ansible git
 
-# Install required software
-sudo apt install -y software-properties-common
-sudo apt install -y ansible git
+# Clone the repository
+cd /Ansible
+git clone https://your-repository-url/installations.git
 
-# Clone the Ansible playbook repository
-mkdir Ansible
-cd Ansible
-git clone https://github.com/mhmdnasr98/installitions.git
+# Navigate to the correct directory
+cd installations
 
-# Run Ansible playbook
-cd installitions
-ansible-playbook -i localhost Jenkins-playbook.yml
+# Run the playbook
+ansible-playbook Jenkins.yml
