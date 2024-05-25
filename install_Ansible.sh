@@ -9,10 +9,10 @@ apt-get update -y
 apt-get install -y ansible git
 
 # Create the directory if it doesn't exist
-mkdir -p /Ansible
+mkdir -p /ansible
 
 # Change to the correct directory
-cd /Ansible
+cd /ansible
 
 # Clone the repository
 git clone https://github.com/mhmdnasr98/installations.git
