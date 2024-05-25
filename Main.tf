@@ -2,7 +2,6 @@ resource "aws_security_group" "Jenkins-sg" {
   name        = "Jenkins-Security Group"
   description = "Open 22,443,80,8080"
 
-  # Define a single ingress rule to allow traffic on all specified ports
   ingress = [
     for port in [22, 80, 443, 8080] : {
       description      = "TLS from VPC"
@@ -29,17 +28,17 @@ resource "aws_security_group" "Jenkins-sg" {
   }
 }
 
-
 resource "aws_instance" "web" {
   ami                    = "ami-0e001c9271cf7f3b9"
   instance_type          = "t2.medium"
   key_name               = "ansible-cotrol-key"
   vpc_security_group_ids = [aws_security_group.Jenkins-sg.id]
-  user_data              = templatefile("./install_Ansible.sh", {})
+  user_data              = file("install_Ansible.sh")
 
   tags = {
     Name = "Jenkins-server"
   }
+
   root_block_device {
     volume_size = 8
   }
