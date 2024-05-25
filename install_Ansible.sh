@@ -8,12 +8,17 @@ apt-add-repository --yes --update ppa:ansible/ansible
 apt-get update -y
 apt-get install -y ansible git
 
-# Clone the repository
-cd /Ansible
-git clone https://your-repository-url/installations.git
+# Create the directory if it doesn't exist
+mkdir -p /Ansible
 
-# Navigate to the correct directory
+# Change to the correct directory
+cd /Ansible
+
+# Clone the repository
+git clone https://github.com/mhmdnasr98/installations.git
+
+# Navigate to the cloned repository
 cd installations
 
 # Run the playbook
-ansible-playbook Jenkins.yml
+ansible-playbook Jenkins-playbook.yml
