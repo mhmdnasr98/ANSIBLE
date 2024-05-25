@@ -36,5 +36,12 @@ fi
 # Navigate to the cloned repository
 cd /Ansible/installations
 
-# Run the playbook
-ansible-playbook Jenkins-playbook.yml
+# Check if the playbook file exists
+if [ -f "Jenkins-playbook.yml" ]; then
+  echo "Jenkins-playbook.yml found, running playbook."
+  # Run the playbook
+  ansible-playbook Jenkins-playbook.yml
+else
+  echo "Jenkins-playbook.yml not found."
+  exit 1
+fi
