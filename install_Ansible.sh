@@ -1,47 +1,13 @@
 #!/bin/bash
-apt-get update -y
-apt-get upgrade -y
-
-# Install Ansible and git
-apt-get install -y software-properties-common
-apt-add-repository --yes --update ppa:ansible/ansible
-apt-get update -y
-apt-get install -y ansible git
-
-# Create the directory if it doesn't exist
-mkdir -p /Ansible
-
-# Check if the directory was created successfully
-if [ -d "/Ansible" ]; then
-  echo "Directory /Ansible created successfully."
-else
-  echo "Failed to create directory /Ansible."
-  exit 1
-fi
-
-# Change to the correct directory
-cd /Ansible
-
-# Clone the repository
-git clone https://github.com/mhmdnasr98/installations.git
-
-# Check if the repository was cloned successfully
-if [ -d "/Ansible/installations" ]; then
-  echo "Repository cloned successfully."
-else
-  echo "Failed to clone repository."
-  exit 1
-fi
-
-# Navigate to the cloned repository
-cd /Ansible/installations
-
-# Check if the playbook file exists
-if [ -f "Jenkins-playbook.yml" ]; then
-  echo "Jenkins-playbook.yml found, running playbook."
-  # Run the playbook
-  ansible-playbook Jenkins-playbook.yml
-else
-  echo "Jenkins-playbook.yml not found."
-  exit 1
-fi
+exec > >(tee -i /var/log/user-data.log)
+exec 2>&1
+sudo apt update -y
+sudo apt install software-properties-common
+sudo add-apt-repository --yes --update ppa:ansible/ansible
+sudo apt install ansible -y
+sudo apt install git -y 
+mkdir Ansible && cd Ansible
+pwd
+git clone https://github.com/Aj7Ay/ANSIBLE.git
+cd ANSIBLE
+ansible-playbook -i localhost Jenkins.yml
